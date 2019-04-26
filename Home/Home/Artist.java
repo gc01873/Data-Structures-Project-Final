@@ -12,6 +12,7 @@ public class Artist implements Serializable {
 	
 
 	public void addDisco() {
+		System.out.println();
 		Playlist Lib = new Playlist(Name + " Library ");
 		for(Song NowPlaying :Lib.getListOfSongs()) {
 			if(NowPlaying.artistName==this.getName()) {
