@@ -8,13 +8,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-//import java.io.Serializable;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Map.Entry;
 
 //import application.Main;
+//import application.Player;
+
 import java.util.Random;
 import java.util.Scanner;
 import javafx.embed.swing.JFXPanel;
@@ -22,6 +24,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
+//import application.Player;
+
 
 public class Itunes implements java.io.Serializable {
 	/**
@@ -36,16 +40,16 @@ public class Itunes implements java.io.Serializable {
 	public static Random randomGenerator;
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException {
 		randomGenerator = new Random();
-		/*	Itunes itunes = new Itunes();
 
-	itunes.loadSongs();
+		/*	Itunes itunes = new Itunes();
+		itunes.loadSongs();
 		itunes.displayAllSongs();
 		serializeContainer(itunes);*/
 
 
 		Itunes itunes = deserializer();// Why is this duplicate variable
 		//	playStream(itunes.ArtistMap.get("Bryce Vine").getAlbums().get("Bryce"));
-		//	playStream(itunes.getSongLibrary());
+		//playStream(itunes.getSongLibrary());
 		//playSong("Kanye West - Stronger");
 		//itunes.songSearch("Default");
 		//	System.out.println(itunes.displayArtists());
@@ -53,10 +57,10 @@ public class Itunes implements java.io.Serializable {
 		//	System.out.println(itunes.AlbumMap.));
 		//System.out.println(itunes.ArtistMap.get("Bryce Vine").getAlbums().toString());
 		//	System.out.println(itunes.displayAlbums());
-		/*for(Song s : itunes.AlbumMap.get("Bryce").getListOfSongs()) {
+		/*for(Song s : itunes.AlbumMap.get("Rapper").getListOfSongs()) {
 			System.out.println(s.getName());
 		}*/
-		System.out.println(itunes.songLibrary.getListOfSongs().size());
+		//System.out.println(itunes.songLibrary.getListOfSongs().size());
 		//see if the artistMap has songs
 		//System.out.println(itunes.ArtistMap.get("Bryce Vine").getAlbums().get("A").AlbumName);
 		//itunes.songSearch("Juice WRLD");
@@ -115,6 +119,7 @@ public class Itunes implements java.io.Serializable {
 			while(Player.mPlayer.getStatus().equals(Status.UNKNOWN)) {
 				System.out.println("Unknown");
 				Thread.sleep(1000);
+
 			}
 			if(Player.mPlayer.getStatus().equals(Status.STOPPED)|| Player.mPlayer.getStatus().equals(Status.READY)) {
 				System.out.println("Stopped giving new Media");
@@ -165,9 +170,10 @@ public class Itunes implements java.io.Serializable {
 	}
 	 */
 	public  void songSearch(String Search) throws InterruptedException {
-		if(ArtistMap.containsKey(Search)) {
+		if(ArtistMap.containsKey(Search)) {			
 			System.out.println("Found Artist");
 			//		System.out.println("Which album?");
+			//for(Ar)
 			//	playStream((ArtistMap.get(Search).getAlbums()).displayAlbum(Search)); //May have to work on default
 		}
 		if(AlbumMap.containsKey(Search)) {
@@ -190,19 +196,19 @@ public class Itunes implements java.io.Serializable {
 		int index = randomGenerator.nextInt(getSongLibrary().getListOfSongs().size());
 		System.out.println(index);
 		Song JukeBox = getSongLibrary().getListOfSongs().get(index);
-Player.mPlayer = new MediaPlayer(new Media(new File("C:\\Users\\sm06156\\eclipse-workspace\\DataStrGC\\Home\\Home\\" + JukeBox.artistName + " - " + 
-		JukeBox.getName() + ".mp3" ).toURI().toString()));
-Player.mPlayer.setOnReady(new Runnable() {
-	public void run(){
-		Player.mPlayer.play();
-	}
-});
-Player.mPlayer.setOnEndOfMedia(new Runnable(){
-	public void run() {
-		Player.mPlayer.stop(); 
-	}
+		Player.mPlayer = new MediaPlayer(new Media(new File("C:\\Users\\sm06156\\eclipse-workspace\\DataStrGC\\Home\\Home\\" + JukeBox.artistName + " - " + 
+				JukeBox.getName() + ".mp3" ).toURI().toString()));
+		Player.mPlayer.setOnReady(new Runnable() {
+			public void run(){
+				Player.mPlayer.play();
+			}
+		});
+		Player.mPlayer.setOnEndOfMedia(new Runnable(){
+			public void run() {
+				Player.mPlayer.stop(); 
+			}
 
-});
+		});
 	}
 
 	public static void pause() {
